@@ -34,27 +34,27 @@ func (s SymmetricEncrypter) GetEncryptedText() string {
 
 func (s *SymmetricEncrypter) Encrypt() (string, error) {
 	if s.encryptionKey == nil {
-		return "", errors.New("Encryption key is not set")
+		return "", errors.New("encryption key is not set")
 	}
 
 	if s.plainText == nil {
-		return "", errors.New("Plain text is not set")
+		return "", errors.New("plain text is not set")
 	}
 
 	block, err := aes.NewCipher(s.encryptionKey)
-    if err != nil {
-        return "", err
-    }
-	
+	if err != nil {
+		return "", err
+	}
+
 	gcm, err := cipher.NewGCM(block)
-    if err != nil {
-        return "", err
-    }
+	if err != nil {
+		return "", err
+	}
 
 	nonce := make([]byte, gcm.NonceSize())
-    if _, err := rand.Read(nonce); err != nil {
-        return "", err
-    }
+	if _, err := rand.Read(nonce); err != nil {
+		return "", err
+	}
 	cipherText := gcm.Seal(nil, nonce, s.plainText, nil)
 	s.cipherText = append(nonce, cipherText...)
 
@@ -64,23 +64,23 @@ func (s *SymmetricEncrypter) Encrypt() (string, error) {
 
 func (s *SymmetricEncrypter) Decrypt() (string, error) {
 	if s.encryptionKey == nil {
-		return "", errors.New("Encryption key is not set")
+		return "", errors.New("encryption key is not set")
 	}
 
 	if s.cipherText == nil {
-		return "", errors.New("Cipher text is not set")
+		return "", errors.New("cipher text is not set")
 	}
 
 	if s.encryptedText == "" {
-		return "", errors.New("Encrypted text is not set")
+		return "", errors.New("encrypted text is not set")
 	}
 
 	block, _ := aes.NewCipher(s.encryptionKey)
 	gcm, _ := cipher.NewGCM(block)
 	nonceSize := gcm.NonceSize()
-    if len(s.cipherText) < nonceSize {
-        return "", errors.New("ciphertext too short")
-    }
+	if len(s.cipherText) < nonceSize {
+		return "", errors.New("cipher Text too short")
+	}
 	nonce, cipherText := s.cipherText[:nonceSize], s.cipherText[nonceSize:]
 	plainText, err := gcm.Open(nil, nonce, cipherText, nil)
 	if err != nil {
