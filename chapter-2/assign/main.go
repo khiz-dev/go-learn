@@ -1,14 +1,15 @@
 package main
 
+var (
+	maxSpeed         int     = 600
+	maxSpinSpeed     int     = 400
+	maxDarkThreshold int     = 500
+	isActive         bool    = true
+	isCalibrated     bool    = false
+	maxRatio         float32 = 1.34e22
+)
+
 func main() {
-	var (
-		maxSpeed         int     = 600
-		maxSpinSpeed     int     = 400
-		maxDarkThreshold int     = 500
-		isActive         bool    = true
-		isCalibrated     bool    = false
-		maxRatio         float32 = 1.34e22
-	)
 
 	println("Max Speed:", maxSpeed)
 	println("Max Spin Speed:", maxSpinSpeed)
