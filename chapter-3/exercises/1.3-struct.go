@@ -26,4 +26,5 @@ func Exercise3() {
 	fmt.Printf("Employee 1: %+v\n", emp1)
 	fmt.Printf("Employee 2: %+v\n", emp2)
 	fmt.Printf("Employee 3: %+v\n", emp3)
+	fmt.Println("")
 }

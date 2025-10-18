@@ -9,4 +9,5 @@ func Exercise2() {
 	fmt.Println("Message: ", message)
 	fmt.Println("The forth character in the message is: ", message[3])
 	fmt.Printf("The fourth rune in the message is: %c\n", forthRune)
+	fmt.Println("")
 }

@@ -12,4 +12,5 @@ func Exercise1() {
 	fmt.Println("First two greetings: ", fSlice)
 	fmt.Println("Middle three greetings: ", sSlice)
 	fmt.Println("Last greeting: ", tSlice)
+	fmt.Println("")
 }
