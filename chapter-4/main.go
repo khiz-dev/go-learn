@@ -6,4 +6,7 @@ import (
 
 func main() {
 	exercises.Exercise0()
+	exercises.Exercise1()
+	exercises.Exercise2()
+	exercises.Exercise3()
 }
