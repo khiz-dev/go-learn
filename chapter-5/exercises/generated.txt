@@ -1,0 +1,5 @@
+Alan Turing was an eccentric and brilliant mathematician whose work in code-breaking during World War II is credited with shortening the war and saving countless lives. Despite his extraordinary contributions, he was persecuted for his homosexuality in 1952, a time when homosexual acts were illegal in the UK.
+Key achievements:
+Code-breaking: He was a central figure at Bletchley Park, the British code-breaking center during World War II. He developed the Bombe, an electro-mechanical machine that helped decrypt the German Enigma code.
+Modern computing: His theoretical work in the 1930s laid the foundation for modern computer science. He conceived of the "Universal Machine"—now known as the Turing machine—which is a foundational model for the general-purpose computer.
+Artificial intelligence (AI): He is widely considered the father of AI. In his 1950 paper, "Computing Machinery and Intelligence," he proposed the "Turing Test," an experiment designed to evaluate a machine's ability to exhibit intelligent behavior indistinguishable from a human's.
