@@ -11,6 +11,7 @@ import (
 
 type config struct {
 	commands         map[string]cliCommand
+	arguments        []string
 	pokeapiClient    pokeapi.Client
 	nextLocationsURL *string
 	prevLocationsURL *string
@@ -28,6 +29,10 @@ func startRepl(cfg *config) {
 		}
 
 		commandName := words[0]
+
+		if len(words) > 1 {
+			cfg.arguments = words[1:]
+		}
 
 		command, exists := cfg.commands[commandName]
 		if exists {
@@ -71,6 +76,11 @@ func getCommands() map[string]cliCommand {
 			name:        "mapb",
 			description: "Displays a list of location areas (backwards)",
 			callback:    commandMapb,
+		},
+		"explore": {
+			name:        "explore",
+			description: "Displays a list of Pokemons in a location area",
+			callback:    commandExplore,
 		},
 		"exit": {
 			name:        "exit",

@@ -6,42 +6,42 @@ import (
 	"net/http"
 )
 
-func (c *Client) ListPokemons(locationArea string) (responseResult, error) {
-	url := baseURL + "location-area"
+func (c *Client) ListPokemonsInLocationArea(locationArea string) (exploreResponseResult, error) {
+	url := baseURL + "location-area/" + locationArea
 
 	// Checking Cache
 	cacheRes, ok := c.cache.Get(url)
 	if ok {
-		locationResp := responseResult{}
-		err := json.Unmarshal(cacheRes, &locationResp)
+		pokemonsResp := exploreResponseResult{}
+		err := json.Unmarshal(cacheRes, &pokemonsResp)
 		if err != nil {
-			return responseResult{}, err
+			return exploreResponseResult{}, err
 		}
-		return locationResp, nil
+		return pokemonsResp, nil
 	}
 
 	req, err := http.NewRequest("GET", url, nil)
 	if err != nil {
-		return responseResult{}, err
+		return exploreResponseResult{}, err
 	}
 
 	resp, err := c.httpClient.Do(req)
 	if err != nil {
-		return responseResult{}, err
+		return exploreResponseResult{}, err
 	}
 	defer resp.Body.Close()
 
 	dat, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return responseResult{}, err
+		return exploreResponseResult{}, err
 	}
 	// Adding to cache
 	c.cache.Add(url, dat)
 
-	locationResp := responseResult{}
-	err = json.Unmarshal(dat, &locationResp)
+	pokemonsResp := exploreResponseResult{}
+	err = json.Unmarshal(dat, &pokemonsResp)
 	if err != nil {
-		return responseResult{}, err
+		return exploreResponseResult{}, err
 	}
-	return locationResp, nil
+	return pokemonsResp, nil
 }
