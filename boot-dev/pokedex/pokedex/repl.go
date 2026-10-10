@@ -16,22 +16,6 @@ type config struct {
 	prevLocationsURL *string
 }
 
-func (c *config) setPokeapiClient(pokeapiClient pokeapi.Client) {
-	c.pokeapiClient = pokeapiClient
-}
-
-func (c *config) setNextLocationsURL(nextLocationsURL *string) {
-	c.nextLocationsURL = nextLocationsURL
-}
-
-func (c *config) setPrevLocationsURL(prevLocationsURL *string) {
-	c.prevLocationsURL = prevLocationsURL
-}
-
-func (c *config) setCommands(commands map[string]cliCommand) {
-	c.commands = commands
-}
-
 func startRepl(cfg *config) {
 	reader := bufio.NewScanner(os.Stdin)
 	for {
