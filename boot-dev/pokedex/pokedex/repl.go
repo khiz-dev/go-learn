@@ -5,15 +5,31 @@ import (
 	"fmt"
 	"os"
 	"strings"
+
+	"github.com/khiz-dev/pokedexcli/internal/pokeapi"
 )
 
 type config struct {
-	commands map[string]cliCommand
-	state    string
+	commands         map[string]cliCommand
+	pokeapiClient    pokeapi.Client
+	nextLocationsURL *string
+	prevLocationsURL *string
 }
 
-func (c *config) setState(state string) {
-	c.state = state
+func (c *config) setPokeapiClient(pokeapiClient pokeapi.Client) {
+	c.pokeapiClient = pokeapiClient
+}
+
+func (c *config) setNextLocationsURL(nextLocationsURL *string) {
+	c.nextLocationsURL = nextLocationsURL
+}
+
+func (c *config) setPrevLocationsURL(prevLocationsURL *string) {
+	c.prevLocationsURL = prevLocationsURL
+}
+
+func (c *config) setCommands(commands map[string]cliCommand) {
+	c.commands = commands
 }
 
 func startRepl(cfg *config) {
@@ -62,15 +78,20 @@ func getCommands() map[string]cliCommand {
 			description: "Displays a help message",
 			callback:    commandHelp,
 		},
+		"map": {
+			name:        "map",
+			description: "Displays a list of location areas",
+			callback:    commandMapf,
+		},
+		"mapb": {
+			name:        "mapb",
+			description: "Displays a list of location areas (backwards)",
+			callback:    commandMapb,
+		},
 		"exit": {
 			name:        "exit",
 			description: "Exit the Pokedex",
 			callback:    commandExit,
-		},
-		"map": {
-			name:        "map",
-			description: "Displays a list of location areas",
-			callback:    commandMap,
 		},
 	}
 }

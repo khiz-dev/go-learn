@@ -1,8 +1,12 @@
 package pokeapi
 
-import "net/http"
+import (
+	"encoding/json"
+	"io"
+	"net/http"
+)
 
-func (c *Client) GetLocationList(pageURL *string) (responseResult, error) {
+func (c *Client) ListLocations(pageURL *string) (responseResult, error) {
 	url := baseURL + "location-area"
 	if pageURL != nil {
 		url = *pageURL
@@ -13,7 +17,7 @@ func (c *Client) GetLocationList(pageURL *string) (responseResult, error) {
 		return responseResult{}, err
 	}
 
-	resp, err :- c.httpClient.Do(req)
+	resp, err := c.httpClient.Do(req)
 	if err != nil {
 		return responseResult{}, err
 	}
@@ -23,4 +27,10 @@ func (c *Client) GetLocationList(pageURL *string) (responseResult, error) {
 	if err != nil {
 		return responseResult{}, err
 	}
+	locationResp := responseResult{}
+	err = json.Unmarshal(dat, &locationResp)
+	if err != nil {
+		return responseResult{}, err
+	}
+	return locationResp, nil
 }
